@@ -289,6 +289,11 @@
             <messages/>
             <associations/>
           </diagram>
+          <diagram xmi.id="uWP0XwvPM6Jb3" name="diagrama de sequencia Cadastrar" type="3" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffc0" font="Sans Serif,9,-1,5,50,0,0,0,0,0" griddotcolor="#d3d3d3" linecolor="#990000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="0" snapgrid="0" snapcsgrid="0" snapx="25" snapy="25" zoom="100" canvasheight="800" canvaswidth="1100" isopen="1" autoincrementsequence="0">
+            <widgets/>
+            <messages/>
+            <associations/>
+          </diagram>
         </diagrams>
       </xmi:Extension>
     </packagedElement>
@@ -599,7 +604,7 @@
     <packagedElement xmi:type="uml:Model" xmi:id="Entity_Relationship_Model" name="Entity Relationship Model"/>
   </uml:Model>
   <xmi:Extension extender="umbrello">
-    <docsettings viewid="ukoUt73nnvqnN" documentation="" uniqueid="uHHMrGOPKbjlo"/>
+    <docsettings viewid="uWP0XwvPM6Jb3" documentation="" uniqueid="uWP0XwvPM6Jb3"/>
     <listview>
       <listitem id="Views" type="800" open="1">
         <listitem id="Entity_Relationship_Model" type="836" open="1"/>
@@ -665,6 +670,7 @@
           </listitem>
           <listitem id="uIrf6KqLq5R3x" type="807" label="diagrama de classe" open="0"/>
           <listitem id="uCLBgYYPLI81l" type="810" label="diagrama de sequência" open="0"/>
+          <listitem id="uWP0XwvPM6Jb3" type="810" label="diagrama de sequencia Cadastrar" open="0"/>
           <listitem id="uIbAqtzuEXnKT" type="813" open="1">
             <listitem id="uLtQqoU6J8lqw" type="814" open="0"/>
             <listitem id="uTZiAm7bpxA8m" type="814" open="0"/>
