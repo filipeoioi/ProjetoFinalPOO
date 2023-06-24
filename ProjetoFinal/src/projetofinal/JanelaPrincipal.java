@@ -7,8 +7,17 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class JanelaPrincipal extends javax.swing.JFrame {
+    private CardLayout paginas;
+    
     public JanelaPrincipal() {
         initComponents();
+        paginas = (CardLayout) this.painelPrincipal.getLayout();
+        this.painelPrincipal.add(new TelaServicos(paginas), "telaServicos");
+        this.painelPrincipal.add(new TelaInfos(paginas), "telaInfos");
+        this.painelPrincipal.add(new TelaCadastroImovel(), "telaCadastroImovel");
+        this.painelPrincipal.add(new TelaVazamento(), "telaVazamento");
+        this.painelPrincipal.add(new TelaServicosFuncionario(paginas), "telaServFuncionario");
+        this.painelPrincipal.add(new TelaSolicitacoes(), "telaSolicitacoes");
     }
     
     public void limparCampos(){
@@ -135,8 +144,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        CardLayout paginas = (CardLayout) this.painelPrincipal.getLayout();
-        this.painelPrincipal.add(new TelaServicos(), "telaServicos");
         paginas.show(this.painelPrincipal, "telaServicos");
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -190,6 +197,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel painelLogin;
-    private javax.swing.JPanel painelPrincipal;
+    public javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
