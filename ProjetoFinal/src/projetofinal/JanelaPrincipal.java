@@ -8,9 +8,11 @@ import java.awt.event.WindowEvent;
 
 public class JanelaPrincipal extends javax.swing.JFrame {
     private CardLayout paginas;
+    private Controller controller;
     
     public JanelaPrincipal() {
         initComponents();
+        controller = new Controller();
         paginas = (CardLayout) this.painelPrincipal.getLayout();
         this.painelPrincipal.add(new TelaServicos(paginas), "telaServicos");
         this.painelPrincipal.add(new TelaInfos(paginas), "telaInfos");
@@ -144,7 +146,19 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        paginas.show(this.painelPrincipal, "telaServicos");
+        //Valida o login 
+        String idUser = this.campoID.getText();
+        String senha = this.campoSenha.getText();
+        try{
+            //se o retorno do validar login for true
+            //if(controller.validaLogin(idUser, senha)){
+                
+            //}   
+            paginas.show(this.painelPrincipal, "telaServicos");
+        }catch(NumberFormatException e){
+            
+        }
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private class JanelaListener implements ActionListener{
