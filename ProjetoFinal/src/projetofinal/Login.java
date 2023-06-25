@@ -1,13 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package projetofinal;
 
 
 public class Login {
     private int idUser;
     private String senha;
+
+    public Login(int idUser, String senha) {
+        this.idUser = idUser;
+        this.senha = senha;
+    }
+    
+    
 
     public int getIdUser() {
         return idUser;

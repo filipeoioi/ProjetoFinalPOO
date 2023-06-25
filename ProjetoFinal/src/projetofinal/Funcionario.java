@@ -5,9 +5,14 @@ package projetofinal;
 public class Funcionario implements iUsuario{
     
     private String nome;
-    private int idFuncionario;
-    private int solicitacoesRealizadas;
     private Login login;
+
+    public Funcionario(String nome, int login,String senha) {
+        this.nome = nome;
+        this.login = new Login(login,senha);
+    }
+    
+    
 
     @Override
     public Login getLogin() {

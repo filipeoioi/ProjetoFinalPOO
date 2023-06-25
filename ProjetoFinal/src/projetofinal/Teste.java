@@ -1,20 +1,29 @@
 
 package projetofinal;
 
+import java.util.ArrayList;
+
 
 public class Teste {
       public Teste(){
-            iUsuario f1=new Funcionario();
-            iUsuario c1 = new Cliente();
+            iUsuario joao=new Funcionario("Joao",1234,"aaaa");
+            
+            iUsuario f2=new Funcionario("Filipe",4321,"bbbbb");
+           
+            
+            Login l1=new Login(4321,"bbbbb");
             
             Model m1=new Model();
-            m1.addUsuario(c1);
-            m1.addUsuario(f1);
+           
+     
+            m1.addUsuario(joao);
+            m1.addUsuario(f2);
+            System.out.println(m1.confirmarlogin(l1));
+            //ArrayList<iUsuario>lista=m1.getUsuarios();
             
-            for (iUsuario i : m1) {
-                System.out.println(i.getClass());
-          }
+           
             
+         
         }
     public static void main(String[] args) {
       
