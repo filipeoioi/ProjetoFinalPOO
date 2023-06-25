@@ -1,13 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package projetofinal;
+
+import java.util.ArrayList;
 
 
 public class Cliente implements iUsuario {
     
-    private String login;
+    private ArrayList<Imovel> Imoveis;
+    private Login login;
     private String email;
     private String telefoneResidencial;
     private String telefoneCelular;
