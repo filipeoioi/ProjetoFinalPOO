@@ -5,27 +5,22 @@ public class Funcionario implements iUsuario{
     private String nome;
     private Login login;
 
-    public Funcionario(String nome, int login,String senha) {
+    public Funcionario(String nome) {
         this.nome = nome;
-        this.login = new Login(login,senha);
     }
     
-    
-
     @Override
     public Login getLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.login;
     }
 
     @Override
-    public Login setLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     @Override
-    public int getTipo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
+    public String getTipo() {
+        return this.getClass().getSimpleName();
+    }  
 }
