@@ -1,14 +1,7 @@
-
 package projetofinal;
 
-
 public interface iUsuario {
-    
-    public Login getLogin();
-    public Login setLogin();
-    
-    public int getTipo();
-    
-    
-    
+    public abstract Login getLogin();
+    public abstract void setLogin(Login login);   
+    public abstract String getTipo();
 }
