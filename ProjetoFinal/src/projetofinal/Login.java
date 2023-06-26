@@ -1,6 +1,4 @@
-
 package projetofinal;
-
 
 public class Login {
     private int idUser;
@@ -9,9 +7,7 @@ public class Login {
     public Login(int idUser, String senha) {
         this.idUser = idUser;
         this.senha = senha;
-    }
-    
-    
+    }    
 
     public int getIdUser() {
         return idUser;
@@ -28,5 +24,4 @@ public class Login {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
 }

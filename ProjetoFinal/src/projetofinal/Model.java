@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Model {
     
-    private ArrayList<iUsuario> usuarios;
+    private ArrayList<IUsuario> usuarios;
     private ArrayList<Solicitacao> solicitacoes;
     
     public Model(){
@@ -12,14 +12,14 @@ public class Model {
         this.solicitacoes=new ArrayList<>();
     }
     
-    public void addUsuario(iUsuario usuario){
+    public void addUsuario(IUsuario usuario){
         this.usuarios.add(usuario);
     }
     public void addSolicitacao(Solicitacao solicitacao){
         this.solicitacoes.add(solicitacao);
     }
 
-    public ArrayList<iUsuario> getUsuarios() {
+    public ArrayList<IUsuario> getUsuarios() {
         return usuarios;
     }
 
@@ -27,7 +27,7 @@ public class Model {
         return solicitacoes;
     }
     
-    public int buscar(iUsuario usuario){
+    public int buscar(IUsuario usuario){
         return this.usuarios.indexOf(usuario);
        
     }
@@ -37,7 +37,7 @@ public class Model {
         boolean existesenha=false;
         boolean existe=false;
         
-        for (iUsuario i : this.getUsuarios()) {
+        for (IUsuario i : this.getUsuarios()) {
             if (i.getLogin().getIdUser()==login.getIdUser()) {
                 existelogin=true;
             }

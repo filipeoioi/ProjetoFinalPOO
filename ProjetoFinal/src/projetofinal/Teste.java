@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class Teste {
       public Teste(){
-            iUsuario joao=new Funcionario("Joao",1234,"aaaa");
+            //iUsuario joao=new Funcionario("Joao",1234,"aaaa");
             
-            iUsuario f2=new Funcionario("Filipe",4321,"bbbbb");
+            //iUsuario f2=new Funcionario("Filipe",4321,"bbbbb");
            
             
             Login l1=new Login(4321,"bbbbb");
@@ -16,8 +16,8 @@ public class Teste {
             Model m1=new Model();
            
      
-            m1.addUsuario(joao);
-            m1.addUsuario(f2);
+            //m1.addUsuario(joao);
+            //m1.addUsuario(f2);
             System.out.println(m1.confirmarlogin(l1));
             //ArrayList<iUsuario>lista=m1.getUsuarios();
             

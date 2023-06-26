@@ -1,6 +1,6 @@
 package projetofinal;
 
-public class Funcionario implements iUsuario{
+public class Funcionario implements IUsuario{
     
     private String nome;
     private Login login;
