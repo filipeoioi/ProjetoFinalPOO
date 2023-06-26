@@ -14,6 +14,15 @@ public class Model {
     }
     
     public void addUsuario(iUsuario usuario){
+        if (usuario instanceof Cliente) {
+            System.out.println("Adicionando Cliente");
+            usuario.setTipo(1);
+            
+        }else if(usuario instanceof Funcionario){
+            System.out.println("Adicionando Funcionario");
+            usuario.setTipo(2);
+        }
+        
         this.usuarios.add(usuario);
     }
     public void addSolicitacao(Solicitacao solicitacao){
@@ -29,30 +38,38 @@ public class Model {
     }
     
     public int buscar(iUsuario usuario){
-        return this.usuarios.indexOf(usuario);
+        if (usuario.getTipo() ==1) {
+            System.out.println("Cliente nº "+ this.usuarios.indexOf(usuario));
+            return this.usuarios.indexOf(usuario);
+            
+        }else{
+            System.out.println("Funcionario nº:"+this.usuarios.indexOf(usuario) );
+            return this.usuarios.indexOf(usuario);
+        }
+        
+        
        
     }
     
-    public boolean confirmarlogin(Login login){
-        boolean existelogin=false;
-        boolean existesenha=false;
-        boolean existe=false;
+    public int confirmarlogin(Login login){
         
+        int existe=-100;
+        int h=0;
         for (iUsuario i : this.getUsuarios()) {
-            if (i.getLogin().getIdUser()==login.getIdUser()) {
-                existelogin=true;
-            }
-            if (i.getLogin().getSenha().equals(login.getSenha())) {
-                existesenha=true;
-            }
             
-            if (existelogin && existesenha) {
-                existe=true;
+            if (i.getLogin().getIdUser()==login.getIdUser() && i.getLogin().getSenha().equals(login.getSenha())) {
+                existe=h;
             }
-            
+           
+            h++;
         }
         
         return existe;
     }
+ 
+    
+  
+    
+    
     
 }
