@@ -1,6 +1,4 @@
-
 package projetofinal;
-
 
 public class Funcionario implements iUsuario{
     

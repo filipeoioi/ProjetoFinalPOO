@@ -1,4 +1,3 @@
-
 package projetofinal;
 
 import java.util.ArrayList;
@@ -49,9 +48,7 @@ public class Model {
             if (existelogin && existesenha) {
                 existe=true;
             }
-            
         }
-        
         return existe;
     }
     
