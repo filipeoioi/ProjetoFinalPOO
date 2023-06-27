@@ -39,6 +39,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Seneamento Água");
         setResizable(false);
+        setSize(new java.awt.Dimension(700, 500));
 
         painelPrincipal.setLayout(new java.awt.CardLayout());
 
