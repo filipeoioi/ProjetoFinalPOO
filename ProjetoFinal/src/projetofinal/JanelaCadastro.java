@@ -397,6 +397,7 @@ public class JanelaCadastro extends javax.swing.JFrame {
         if (rodou){
             this.controller.validaCadastro(user);
             Cliente.fechar();
+            fechar();
             this.exibeMensagem("Cadastro realizado com sucesso");
             this.dispose();
         }

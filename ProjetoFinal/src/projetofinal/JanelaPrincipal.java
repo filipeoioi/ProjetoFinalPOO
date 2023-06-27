@@ -137,7 +137,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     
     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        this.btnCadastrar.addActionListener(new JanelaListener());
+        JanelaCadastro janelaCadastro = JanelaCadastro.iniciar(controller);
+        janelaCadastro.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                JanelaCadastro.fechar();
+            }
+        });
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
@@ -169,18 +175,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         this.campoID.setText("");
         this.campoSenha.setText("");
     }
-    private class JanelaListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            JanelaCadastro janelaCadastro = JanelaCadastro.iniciar(controller);
-            janelaCadastro.addWindowListener(new WindowAdapter(){
-                @Override
-                public void windowClosing(WindowEvent e){
-                    JanelaCadastro.fechar();
-                }
-            });
-        }
-    }
+    
       
     public static void main(String args[]) {
         try {
