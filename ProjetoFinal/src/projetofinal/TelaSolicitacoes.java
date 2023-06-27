@@ -75,7 +75,15 @@ public class TelaSolicitacoes extends javax.swing.JPanel {
             new String [] {
                 "ID User", "Cód.", "Descrição"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaSolicitacoes);
 
         btnVoltar.setFont(new java.awt.Font("Noto Sans Mono", 0, 15)); // NOI18N

@@ -103,7 +103,15 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
             new String [] {
                 "Rua", "Nº", "Complemento", "CEP"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaImoveis);
 
         btnConcluir.setFont(new java.awt.Font("Noto Sans Mono", 0, 15)); // NOI18N
