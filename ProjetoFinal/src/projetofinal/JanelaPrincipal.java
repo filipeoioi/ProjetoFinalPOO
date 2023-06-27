@@ -137,8 +137,7 @@ public class JanelaPrincipal extends javax.swing.JFrame implements Integracao{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         JanelaCadastro janelaCadastro = JanelaCadastro.iniciar(controller);
         janelaCadastro.addWindowListener(new WindowAdapter(){
@@ -178,8 +177,7 @@ public class JanelaPrincipal extends javax.swing.JFrame implements Integracao{
         this.campoID.setText("");
         this.campoSenha.setText("");
     }
-    
-      
+         
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
