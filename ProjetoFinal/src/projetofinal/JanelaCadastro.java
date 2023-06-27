@@ -340,7 +340,7 @@ public class JanelaCadastro extends javax.swing.JFrame {
         String nome = this.campoNome.getText();
         String senha = this.campoSenha.getText();
         String email = this.campoEmail.getText();
-        String login = this.campoLogin.getText();
+        String login = this.campoLogin.getText().trim();
         String telResidencialtxt = this.campoResidencial.getText();
         String telCelulartxt = this.campoCelular.getText();
         String codBancotxt = this.campoCodBanco.getText();

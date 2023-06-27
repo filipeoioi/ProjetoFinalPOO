@@ -201,10 +201,10 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
     
     private void cadastrar(){
-        int numero = controller.validaNumeros(this.campoNumero.getText());
-        int cep = controller.validaNumeros(this.campoCEP.getText());
-        String rua = this.campoRua.getText();
-        String complemento = this.campoComplemento.getText();
+        int numero = controller.validaNumeros(this.campoNumero.getText().trim());
+        int cep = controller.validaNumeros(this.campoCEP.getText().trim());
+        String rua = this.campoRua.getText().trim();
+        String complemento = this.campoComplemento.getText().trim();
         if (numero == -999){
             this.exibeMensagemErro("Erro!! Caractere inválido no campo número.");
             this.limparCampo("numero");
@@ -214,19 +214,22 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
             this.limparCampo("cep");
         }
         if (linhas <= 13){
+            Imovel imovel = new Imovel(rua, numero, cep, complemento);
             if (linhas > 0){
-                if (this.verificaAnterior(linhas, rua, numero, complemento, cep)){
+                if (this.controller.verificarImovel(this.cliente.getImoveis(), imovel)){
                     this.exibeMensagemErro("Erro!! Este endereço já foi inserido.");
                     this.limpaCampos();
                 }else if (numero != -999 && cep != -999){
                     this.addLinha(rua, numero, complemento, cep, linhas);
                     this.cliente.addImovel(new Imovel(rua, numero, cep, complemento));
+                    this.limpaCampos();
                     linhas++;
                 }
             }  
             if (linhas == 0 && numero != -999 && cep != -999){
                 this.addLinha(rua, numero, complemento, cep, linhas);
                 this.cliente.addImovel(new Imovel(rua, numero, cep, complemento));
+                this.limpaCampos();
                 linhas++;
             }
         }
@@ -236,12 +239,6 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
         this.tabelaImoveis.setValueAt(numero, linha, 1);
         this.tabelaImoveis.setValueAt(complemento, linha, 2);
         this.tabelaImoveis.setValueAt(cep, linha, 3);
-    }
-    private boolean verificaAnterior(int linha, String rua, int numero, String complemento, int cep){
-        return (this.tabelaImoveis.getValueAt(linha-1, 0).equals(rua) && 
-                this.tabelaImoveis.getValueAt(linha-1, 1).equals(numero) &&
-                this.tabelaImoveis.getValueAt(linha-1, 2).equals(complemento) &&
-                this.tabelaImoveis.getValueAt(linha-1, 3).equals(cep));
     }
     private void exibeMensagemErro(String mensagem){
         JOptionPane.showMessageDialog(this, mensagem, "Erro",JOptionPane.ERROR_MESSAGE);

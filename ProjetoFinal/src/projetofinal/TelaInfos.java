@@ -4,12 +4,20 @@ import java.awt.CardLayout;
 
 public class TelaInfos extends javax.swing.JPanel {
     CardLayout cardLayout;
-    public TelaInfos(CardLayout layout) {
+    private static TelaInfos telaInfos = null;
+    private TelaInfos(CardLayout layout) {
         initComponents();
         cardLayout = layout;
         this.mostrarInfos();
     }
-
+    
+    public static TelaInfos iniciar(CardLayout layout){
+        if (telaInfos == null){
+            telaInfos = new TelaInfos(layout);
+        }
+        return telaInfos;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,6 +39,7 @@ public class TelaInfos extends javax.swing.JPanel {
         lblTelR = new javax.swing.JLabel();
         lblNumConta = new javax.swing.JLabel();
         lblCodBanco = new javax.swing.JLabel();
+        btnAtualiza = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Noto Sans Mono", 0, 36)); // NOI18N
         jLabel1.setText("Dados Usuário");
@@ -105,6 +114,14 @@ public class TelaInfos extends javax.swing.JPanel {
         lblCodBanco.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
         lblCodBanco.setText("jLabel14");
 
+        btnAtualiza.setFont(new java.awt.Font("Noto Sans Mono", 0, 12)); // NOI18N
+        btnAtualiza.setText("Atualizar");
+        btnAtualiza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,7 +159,10 @@ public class TelaInfos extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
-                    .addComponent(btnVoltar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAtualiza)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltar)))
                 .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +202,9 @@ public class TelaInfos extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVoltar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltar)
+                    .addComponent(btnAtualiza))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -190,6 +212,10 @@ public class TelaInfos extends javax.swing.JPanel {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         cardLayout.show(this.getParent(), "telaServicos");
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnAtualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizaActionPerformed
+        this.mostrarInfos();
+    }//GEN-LAST:event_btnAtualizaActionPerformed
     
     private void mostrarInfos(){
         Cliente cliente = Cliente.iniciar();
@@ -210,6 +236,7 @@ public class TelaInfos extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualiza;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

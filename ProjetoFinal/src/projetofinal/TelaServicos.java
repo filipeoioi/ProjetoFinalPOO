@@ -130,7 +130,7 @@ public class TelaServicos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVazamentoActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        //Cliente cliente = Cliente.fechar();
+        Cliente.fechar();
         cardLayout.first(this.getParent());
     }//GEN-LAST:event_btnSairActionPerformed
 

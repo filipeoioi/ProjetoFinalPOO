@@ -1,7 +1,10 @@
 package projetofinal;
 
+import java.util.ArrayList;
+
 public class Controller {
     private Model model;
+    private Solicitacao solicitacao;
     private static Controller controller;
     
     public static Controller iniciar(){
@@ -16,6 +19,7 @@ public class Controller {
         funcionario.setLogin(loginFuncionario);
         this.model = new Model();
         this.model.addUsuario(funcionario);
+        this.model.addSolicitacao(new Solicitacao("Solicitação teste", "filipe", 98632657));
     }
     public int validaNumeros(String numero){
         int num;
@@ -41,5 +45,33 @@ public class Controller {
     }
     public int buscarUser(Login login){
         return this.model.buscaUser(login);
+    }
+    public boolean verificarImovel(ArrayList<Imovel> imoveis, Imovel imovel){
+        boolean existe = false;
+        for (Imovel i : imoveis){
+            if (i.getRua().equals(imovel.getRua()) && 
+                    i.getCEP() == imovel.getCEP() &&
+                    i.getNumero() == imovel.getNumero() &&
+                    i.getComplemento().equals(imovel.getComplemento())){
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    public void validaUpdateUser(int indice, IUsuario user){
+        this.model.atualizarUsuario(indice, user);
+    }
+    public void criarSolicitacao(String descricao, String idCliente, int numSolicitacao){
+        this.solicitacao = new Solicitacao(descricao, idCliente, numSolicitacao);
+        this.model.addSolicitacao(solicitacao);
+    }
+    public ArrayList<Solicitacao> validaViewSolicitacoes(){
+        return this.model.getSolicitacoes();
+    }
+    public int validaBusca(int id){
+        return this.model.buscaSolicitacao(id);
+    }
+    public Solicitacao validaViewSolicitacao(int indice){
+        return this.model.getSolicitacao(indice);
     }
 }

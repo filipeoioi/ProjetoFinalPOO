@@ -18,7 +18,7 @@ public class Model {
     public void addSolicitacao(Solicitacao solicitacao){
         this.solicitacoes.add(solicitacao);
     }
-
+    
     public ArrayList<IUsuario> getUsuarios() {
         return usuarios;
     }
@@ -74,4 +74,23 @@ public class Model {
         return existe;
     }
     
+    public void atualizarUsuario(int indice, IUsuario user){
+        this.usuarios.set(indice, user);
+    }
+    
+    public int buscaSolicitacao(int id){
+        int encontrou = -999;
+        int count = 0;
+        for (Solicitacao s : this.getSolicitacoes()){
+            if (s.getId() == id){
+                encontrou = count;
+            }
+            count++;
+        }
+        return encontrou;
+    }
+    
+    public Solicitacao getSolicitacao(int indice){
+        return this.solicitacoes.get(indice);
+    }
 }

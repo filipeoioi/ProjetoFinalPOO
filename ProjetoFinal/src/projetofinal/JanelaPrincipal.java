@@ -16,10 +16,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         controller = Controller.iniciar();
         paginas = (CardLayout) this.painelPrincipal.getLayout();
         this.painelPrincipal.add(new TelaServicos(paginas), "telaServicos");
-        this.painelPrincipal.add(new TelaCadastroImovel(), "telaCadastroImovel");
-        this.painelPrincipal.add(new TelaVazamento(), "telaVazamento");
         this.painelPrincipal.add(new TelaServicosFuncionario(paginas), "telaServFuncionario");
-        this.painelPrincipal.add(new TelaSolicitacoes(), "telaSolicitacoes");
+        this.painelPrincipal.add(new TelaSolicitacoes(paginas), "telaSolicitacoesFuncionario");
     }
     
    
@@ -158,7 +156,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             } else if (user.getTipo().equalsIgnoreCase("Cliente")){
                 cliente = (Cliente) user;
                 Cliente.setCliente(cliente);
-                this.painelPrincipal.add(new TelaInfos(paginas), "telaInfos");
+                this.painelPrincipal.add(TelaInfos.iniciar(paginas), "telaInfos");
+                this.painelPrincipal.add(new TelaCadastroImovel(paginas), "telaCadastroImovel");
+                this.painelPrincipal.add(new TelaVazamento(paginas), "telaVazamento");
                 paginas.show(this.painelPrincipal, "telaServicos");
             }           
         }else {
