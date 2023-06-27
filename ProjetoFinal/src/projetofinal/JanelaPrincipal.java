@@ -115,7 +115,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(btnCadastrar))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         painelPrincipal.add(painelLogin, "janelaLogin");

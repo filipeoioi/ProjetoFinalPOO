@@ -86,7 +86,15 @@ public class TelaInfos extends javax.swing.JPanel {
             new String [] {
                 "Rua", "Nº", "Complemento", "CEP"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaImoveis);
 
         btnVoltar.setText("Voltar");
