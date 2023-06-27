@@ -25,6 +25,7 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
         this.setVisible(true);
         this.controller = Controller.iniciar();
         this.cliente = Cliente.iniciar();
+        this.mostrarImoveis();
     }
 
     @SuppressWarnings("unchecked")
@@ -193,6 +194,7 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+        fechar();
         this.dispose();
     }//GEN-LAST:event_btnConcluirActionPerformed
 
@@ -256,6 +258,12 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
         this.campoCEP.setText("");
         this.campoComplemento.setText("");
         this.campoNumero.setText("");
+    }
+    private void mostrarImoveis(){
+        for (Imovel i : this.cliente.getImoveis()){
+            this.addLinha(i.getRua(), i.getNumero(), i.getComplemento(), i.getCEP(), linhas);
+            linhas++;
+        }
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
