@@ -24,6 +24,7 @@ public class TelaVazamento extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         campoTexto = new javax.swing.JTextArea();
         btnRealizar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Noto Sans Mono", 0, 36)); // NOI18N
         jLabel1.setText("Informe o vazamento");
@@ -42,6 +43,14 @@ public class TelaVazamento extends javax.swing.JPanel {
         btnRealizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRealizarActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setFont(new java.awt.Font("Noto Sans Mono", 1, 15)); // NOI18N
+        btnVoltar.setText("Voltar ");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -65,6 +74,8 @@ public class TelaVazamento extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(143, 143, 143))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addGap(63, 63, 63)
                         .addComponent(btnRealizar)
                         .addGap(24, 24, 24))))
         );
@@ -78,7 +89,9 @@ public class TelaVazamento extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(btnRealizar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRealizar)
+                    .addComponent(btnVoltar))
                 .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -86,6 +99,10 @@ public class TelaVazamento extends javax.swing.JPanel {
     private void btnRealizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarActionPerformed
         this.realizarSolicitacao();
     }//GEN-LAST:event_btnRealizarActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.layout.show(this.getParent(), "telaServicos");
+    }//GEN-LAST:event_btnVoltarActionPerformed
     
     private void realizarSolicitacao(){
         Random random = new Random();
@@ -102,6 +119,7 @@ public class TelaVazamento extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRealizar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JTextArea campoTexto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;

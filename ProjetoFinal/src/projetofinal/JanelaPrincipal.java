@@ -1,8 +1,6 @@
 package projetofinal;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
@@ -38,7 +36,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Seneamento Água");
-        setResizable(false);
         setSize(new java.awt.Dimension(700, 500));
 
         painelPrincipal.setLayout(new java.awt.CardLayout());
