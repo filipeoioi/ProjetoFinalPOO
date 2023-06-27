@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.Instant;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class JanelaPrincipal extends javax.swing.JFrame {
+public class JanelaPrincipal extends javax.swing.JFrame implements Integracao{
     private CardLayout paginas;
     private Controller controller;
     
@@ -38,7 +40,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Seneamento Água");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(700, 570));
         setSize(new java.awt.Dimension(700, 500));
 
         painelPrincipal.setLayout(new java.awt.CardLayout());
@@ -217,4 +219,33 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel painelLogin;
     public javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public ArrayList<String> getNomeIntegrante() {
+        ArrayList<String> nomes = new ArrayList<>();
+        nomes.add("Filipe Augusto Parreira Almeida");
+        nomes.add("João Pedro Cavani Meireles");
+        return nomes;
+    }
+
+    @Override
+    public void iniciar() {
+    }
+
+    @Override
+    public String getDescricaoProjeto() {
+        //Instant instant = Instant.now();
+        //System.out.println();
+        return "Descrição";
+    }
+
+    @Override
+    public String getHoraSistema() {
+        return "Hora";
+    }
+
+    @Override
+    public ArrayList<String> getClasses() {
+        return new ArrayList<String>();
+    }
 }
