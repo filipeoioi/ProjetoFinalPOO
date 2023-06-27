@@ -1,8 +1,13 @@
 package projetofinal;
 
+import javax.swing.JOptionPane;
+
 public class JanelaCadastrarImovel extends javax.swing.JFrame {
     
     public static JanelaCadastrarImovel janelaCad;
+    Controller controller;
+    Cliente cliente;
+    int linhas = 0;
     
     public static JanelaCadastrarImovel iniciar(){
         if(janelaCad == null){
@@ -18,6 +23,8 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
     private JanelaCadastrarImovel() {
         initComponents();
         this.setVisible(true);
+        this.controller = Controller.iniciar();
+        this.cliente = Cliente.iniciar();
     }
 
     @SuppressWarnings("unchecked")
@@ -68,7 +75,13 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
 
         btnCadastrar.setFont(new java.awt.Font("Noto Sans Mono", 0, 15)); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
+        tabelaImoveis.setFont(new java.awt.Font("Noto Sans Mono", 0, 12)); // NOI18N
         tabelaImoveis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -180,9 +193,73 @@ public class JanelaCadastrarImovel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnConcluirActionPerformed
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        this.cadastrar();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+    
+    private void cadastrar(){
+        int numero = controller.validaNumeros(this.campoNumero.getText());
+        int cep = controller.validaNumeros(this.campoCEP.getText());
+        String rua = this.campoRua.getText();
+        String complemento = this.campoComplemento.getText();
+        if (numero == -999){
+            this.exibeMensagemErro("Erro!! Caractere inválido no campo número.");
+            this.limparCampo("numero");
+        }
+        if (cep == -999){
+            this.exibeMensagemErro("Erro!! Caractere inválido no campo CEP.");
+            this.limparCampo("cep");
+        }
+        if (linhas <= 13){
+            if (linhas > 0){
+                if (this.verificaAnterior(linhas, rua, numero, complemento, cep)){
+                    this.exibeMensagemErro("Erro!! Este endereço já foi inserido.");
+                    this.limpaCampos();
+                }else if (numero != -999 && cep != -999){
+                    this.addLinha(rua, numero, complemento, cep, linhas);
+                    this.cliente.addImovel(new Imovel(rua, numero, cep, complemento));
+                    linhas++;
+                }
+            }  
+            if (linhas == 0 && numero != -999 && cep != -999){
+                this.addLinha(rua, numero, complemento, cep, linhas);
+                this.cliente.addImovel(new Imovel(rua, numero, cep, complemento));
+                linhas++;
+            }
+        }
+    }
+    private void addLinha(String rua, int numero, String complemento, int cep, int linha){
+        this.tabelaImoveis.setValueAt(rua, linha, 0);
+        this.tabelaImoveis.setValueAt(numero, linha, 1);
+        this.tabelaImoveis.setValueAt(complemento, linha, 2);
+        this.tabelaImoveis.setValueAt(cep, linha, 3);
+    }
+    private boolean verificaAnterior(int linha, String rua, int numero, String complemento, int cep){
+        return (this.tabelaImoveis.getValueAt(linha-1, 0).equals(rua) && 
+                this.tabelaImoveis.getValueAt(linha-1, 1).equals(numero) &&
+                this.tabelaImoveis.getValueAt(linha-1, 2).equals(complemento) &&
+                this.tabelaImoveis.getValueAt(linha-1, 3).equals(cep));
+    }
+    private void exibeMensagemErro(String mensagem){
+        JOptionPane.showMessageDialog(this, mensagem, "Erro",JOptionPane.ERROR_MESSAGE);
+    }
+    private void limparCampo(String campo){
+        if(campo.equals("numero")){
+            this.campoNumero.setText("");
+        }
+        if(campo.equals("cep")){
+            this.campoCEP.setText("");
+        }
+    }
+    private void limpaCampos(){
+        this.campoRua.setText("");
+        this.campoCEP.setText("");
+        this.campoComplemento.setText("");
+        this.campoNumero.setText("");
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

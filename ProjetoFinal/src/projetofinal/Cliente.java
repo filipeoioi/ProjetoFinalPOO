@@ -4,21 +4,30 @@ import java.util.ArrayList;
 
 public class Cliente implements IUsuario {
     
+    private static Cliente cliente;
     private String nome;
-    private ArrayList<Imovel> imoveis;
+    private ArrayList<Imovel> imoveis = new ArrayList<>();
     private Login login;
     private String email;
     private int telefoneResidencial;
     private int telefoneCelular;
-    private ContaBancaria contaBancaria;
+    private ContaBancaria contaBancaria = new ContaBancaria();
     
-    public Cliente(String nome, String email, int telResidencial, int telCelular){
-        this.nome = nome;
-        this.email = email;
-        this.telefoneResidencial = telResidencial;
-        this.telefoneCelular = telCelular;
-        this.imoveis = new ArrayList<>();
-        this.contaBancaria = new ContaBancaria();
+    public static Cliente iniciar(){
+        if (cliente == null)
+            cliente = new Cliente();
+        return cliente;
+    }
+    public static void fechar(){
+        cliente = null;
+    }
+    public static void setCliente(Cliente user){
+        cliente = user;
+    }
+    public static Cliente getCliente(){
+        return cliente;
+    }
+    private Cliente(){
     }
     
     public void setContaBancaria(ContaBancaria contaBancaria){
@@ -30,11 +39,20 @@ public class Cliente implements IUsuario {
     public int getTelResidencial(){
         return this.telefoneResidencial;
     }
+    public void setTelResidencial(int num){
+        this.telefoneResidencial = num;
+    }
     public int getTelCelular(){
         return this.telefoneCelular;
     }
+    public void setTelCelular(int num){
+        this.telefoneCelular = num;
+    }
     public String getEmail(){
         return this.email;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
     public void addImovel(Imovel imovel){
         this.imoveis.add(imovel);
@@ -42,6 +60,13 @@ public class Cliente implements IUsuario {
     public ArrayList<Imovel> getImoveis(){
         return this.imoveis;
     }
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     
     @Override
     public Login getLogin() {

@@ -27,9 +27,8 @@ public class Model {
         return solicitacoes;
     }
     
-    public int buscar(IUsuario usuario){
-        return this.usuarios.indexOf(usuario);
-       
+    public IUsuario getUsuario(int indice){
+        return this.usuarios.get(indice);
     }
     
     public boolean confirmarlogin(Login login){
@@ -38,7 +37,7 @@ public class Model {
         boolean existe=false;
         
         for (IUsuario i : this.getUsuarios()) {
-            if (i.getLogin().getIdUser()==login.getIdUser()) {
+            if (i.getLogin().getIdUser().equals(login.getIdUser())) {
                 existelogin=true;
             }
             if (i.getLogin().getSenha().equals(login.getSenha())) {
@@ -47,6 +46,29 @@ public class Model {
             
             if (existelogin && existesenha) {
                 existe=true;
+            }
+        }
+        return existe;
+    }
+    
+    public int buscaUser(Login login){
+        int index = -999;
+        int count = 0;
+        for (IUsuario i : this.getUsuarios()){
+            if (i.getLogin().getIdUser().equals(login.getIdUser()) &&
+                    i.getLogin().getSenha().equals(login.getSenha())){
+                index = count;
+            }
+            count++;
+        }
+        return index;
+    }
+    
+    public boolean buscaId(String idUser){
+        boolean existe = false;
+        for (IUsuario i : this.usuarios){
+            if (i.getLogin().getIdUser().equals(idUser)){
+                existe = true;
             }
         }
         return existe;

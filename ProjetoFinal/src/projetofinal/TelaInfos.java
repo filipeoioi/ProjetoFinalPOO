@@ -7,6 +7,7 @@ public class TelaInfos extends javax.swing.JPanel {
     public TelaInfos(CardLayout layout) {
         initComponents();
         cardLayout = layout;
+        this.mostrarInfos();
     }
 
     @SuppressWarnings("unchecked")
@@ -55,9 +56,19 @@ public class TelaInfos extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Noto Sans Mono", 0, 15)); // NOI18N
         jLabel8.setText("Cód. Banco: ");
 
-        tabelaImoveis.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
+        tabelaImoveis.setFont(new java.awt.Font("Noto Sans Mono", 0, 12)); // NOI18N
         tabelaImoveis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -177,9 +188,26 @@ public class TelaInfos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-
+        cardLayout.show(this.getParent(), "telaServicos");
     }//GEN-LAST:event_btnVoltarActionPerformed
-
+    
+    private void mostrarInfos(){
+        Cliente cliente = Cliente.iniciar();
+        this.lblNome.setText(cliente.getNome());
+        this.lblEmail.setText(cliente.getEmail());
+        this.lblTelC.setText(Integer.toString(cliente.getTelCelular()));
+        this.lblTelR.setText(Integer.toString(cliente.getTelResidencial()));
+        this.lblNumConta.setText(Integer.toString(cliente.getContaBancaria().getNumConta()));
+        this.lblCodBanco.setText(Integer.toString(cliente.getContaBancaria().getCodBanco()));
+        int linha = 0;
+        for (Imovel i : cliente.getImoveis()){
+            this.tabelaImoveis.setValueAt(i.getRua(), linha, 0);
+            this.tabelaImoveis.setValueAt(i.getNumero(), linha, 1);
+            this.tabelaImoveis.setValueAt(i.getComplemento(), linha, 2);
+            this.tabelaImoveis.setValueAt(i.getCEP(), linha, 3);
+            linha++;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;

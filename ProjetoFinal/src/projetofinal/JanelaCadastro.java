@@ -2,14 +2,20 @@ package projetofinal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 public class JanelaCadastro extends javax.swing.JFrame {
     
     public static JanelaCadastro janelaCadastro = null;
+    private Controller controller;
     
-    public static JanelaCadastro iniciar(){
+    public static JanelaCadastro iniciar(Controller controller){
         if(janelaCadastro == null){
             janelaCadastro = new JanelaCadastro();
         }
@@ -24,12 +30,32 @@ public class JanelaCadastro extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.pnlDebito.setVisible(false);
+        this.lblExiste.setText("");
+        
+        this.controller = Controller.iniciar(); 
+        
+        this.opDebito.addItemListener(new PainelListener());
+        this.opEmail.addItemListener(new PainelListener());
+        this.grupoOp.add(this.opDebito);
+        this.grupoOp.add(this.opEmail); 
+        
+        this.campoLogin.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                if (controller.verificaLogin(campoLogin.getText().trim())){
+                    lblExiste.setText("Já existe");
+                }else{
+                    lblExiste.setText("");
+                }
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoOp = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -41,8 +67,6 @@ public class JanelaCadastro extends javax.swing.JFrame {
         campoCelular = new javax.swing.JTextField();
         campoResidencial = new javax.swing.JTextField();
         campoLogin = new javax.swing.JTextField();
-        opEmail = new javax.swing.JCheckBox();
-        opDebito = new javax.swing.JCheckBox();
         campoSenha = new javax.swing.JPasswordField();
         pnlDebito = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -53,6 +77,9 @@ public class JanelaCadastro extends javax.swing.JFrame {
         btnConcluir = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
+        lblExiste = new javax.swing.JLabel();
+        opEmail = new javax.swing.JRadioButton();
+        opDebito = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro");
@@ -91,17 +118,6 @@ public class JanelaCadastro extends javax.swing.JFrame {
         campoLogin.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
         campoLogin.setMinimumSize(new java.awt.Dimension(50, 30));
         campoLogin.setPreferredSize(new java.awt.Dimension(50, 30));
-
-        opEmail.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
-        opEmail.setText("Receber fatura por e-mail");
-
-        opDebito.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
-        opDebito.setText("Solicitar débito automatico");
-        opDebito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opDebitoActionPerformed(evt);
-            }
-        });
 
         campoSenha.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
         campoSenha.setMinimumSize(new java.awt.Dimension(50, 30));
@@ -159,11 +175,30 @@ public class JanelaCadastro extends javax.swing.JFrame {
 
         btnConcluir.setFont(new java.awt.Font("Noto Sans Mono", 0, 15)); // NOI18N
         btnConcluir.setText("Concluir");
+        btnConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConcluirActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Noto Sans Mono", 0, 15)); // NOI18N
         jLabel10.setText("Nome");
 
         campoNome.setFont(new java.awt.Font("Noto Sans Mono", 0, 14)); // NOI18N
+
+        lblExiste.setFont(new java.awt.Font("Noto Sans Mono", 0, 10)); // NOI18N
+        lblExiste.setText("Já existe");
+
+        opEmail.setFont(new java.awt.Font("Noto Sans Mono", 0, 12)); // NOI18N
+        opEmail.setText("Receber fatura por e-mail");
+
+        opDebito.setFont(new java.awt.Font("Noto Sans Mono", 0, 12)); // NOI18N
+        opDebito.setText("Solicitar débito automatico");
+        opDebito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opDebitoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,13 +216,17 @@ public class JanelaCadastro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel10))
+                                    .addComponent(jLabel10)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(lblExiste)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(campoResidencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,12 +235,16 @@ public class JanelaCadastro extends javax.swing.JFrame {
                                     .addComponent(campoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(campoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
-                            .addComponent(opEmail)
-                            .addComponent(opDebito)
                             .addComponent(pnlDebito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(opEmail))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(opDebito)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -228,12 +271,13 @@ public class JanelaCadastro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(campoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblExiste))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opDebito)
@@ -243,7 +287,7 @@ public class JanelaCadastro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnImovel)
                     .addComponent(btnConcluir))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,22 +304,126 @@ public class JanelaCadastro extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    private class PainelListener implements ItemListener{
+        @Override
+        public void itemStateChanged(ItemEvent ie) {
+            if (opDebito.isSelected()){
+                pnlDebito.setVisible(true);
+            } else if (opEmail.isSelected()){
+                pnlDebito.setVisible(false);
+            }
+        }
+    }
+    
     private void campoNumContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumContaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_campoNumContaActionPerformed
 
-    private void opDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opDebitoActionPerformed
-        if (this.opDebito.isSelected()){
-            this.pnlDebito.setVisible(true);
-        } else{
-            this.pnlDebito.setVisible(false);
-        }
-    }//GEN-LAST:event_opDebitoActionPerformed
-
     private void btnImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImovelActionPerformed
+        Cliente user = Cliente.iniciar();
         this.btnImovel.addActionListener(new JanelaListener());
     }//GEN-LAST:event_btnImovelActionPerformed
+
+    private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+        this.realizaCadastro();
+    }//GEN-LAST:event_btnConcluirActionPerformed
+    
+    private void opDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opDebitoActionPerformed
+        
+    }//GEN-LAST:event_opDebitoActionPerformed
+    
+    
+    private void realizaCadastro(){
+        boolean rodou = true;
+        String nome = this.campoNome.getText();
+        String senha = this.campoSenha.getText();
+        String email = this.campoEmail.getText();
+        String login = this.campoLogin.getText();
+        String telResidencialtxt = this.campoResidencial.getText();
+        String telCelulartxt = this.campoCelular.getText();
+        String codBancotxt = this.campoCodBanco.getText();
+        String numContatxt = this.campoNumConta.getText();       
+                
+        int telResidencial = this.controller.validaNumeros(telResidencialtxt);
+        if (telResidencial == -999){
+            this.exibeMensagemErro("Erro!! Caractere inválido no telefone residencial.");
+            this.limparCampo("telResidencial");
+            rodou = false;
+        }
+        int telCelular = this.controller.validaNumeros(telCelulartxt);
+        if (telCelular == -999){
+            this.exibeMensagemErro("Erro!! Caractere inválido no telefone celular.");
+            this.limparCampo("telCelular");
+            rodou = false;
+        }
+        ContaBancaria cb = new ContaBancaria();
+        if (this.opDebito.isSelected()){
+            int codBanco = this.controller.validaNumeros(codBancotxt);
+            if (codBanco == -999){
+                this.exibeMensagemErro("Erro!! Caractere inválido no código do banco.");
+                this.limparCampo("codBanco");
+                rodou = false;
+            }
+            int numConta = this.controller.validaNumeros(numContatxt);
+            if (numConta == -999){
+                this.exibeMensagemErro("Erro!! Caractere inválido no número da conta.");
+                this.limparCampo("numConta");
+                rodou = false;
+            }
+            cb.setCodBanco(codBanco);
+            cb.setNumConta(numConta);
+        }            
+        
+        if (this.controller.verificaLogin(login)){
+            this.exibeMensagem("Erro!! O login inserido já existe.");
+            rodou = false;
+            this.limparCampo("login");
+        }
+        
+        Cliente user = Cliente.iniciar();
+        user.setNome(nome);
+        user.setTelCelular(telCelular);
+        user.setTelResidencial(telResidencial);
+        user.setEmail(email);
+        user.setLogin(new Login(login, senha));
+        user.setContaBancaria(cb);
+        
+        if (this.opEmail.isSelected() && rodou){
+            this.exibeMensagem("Segunda via será enviada por E-mail");
+        }
+        
+        if (rodou){
+            this.controller.validaCadastro(user);
+            Cliente.fechar();
+            this.exibeMensagem("Cadastro realizado com sucesso");
+            this.dispose();
+        }
+    }
+    private void exibeMensagem(String mensagem){
+        JOptionPane.showMessageDialog(this, mensagem, "Notificação", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void exibeMensagemErro(String mensagem){
+        JOptionPane.showMessageDialog(this, mensagem, "Erro",JOptionPane.ERROR_MESSAGE);
+    }
+    private void limparCampo(String campo){
+        if(campo.equals("numConta")){
+            this.campoNumConta.setText("");
+        }
+        if(campo.equals("codBanco")){
+            this.campoCodBanco.setText("");
+        }
+        if(campo.equals("telCelular")){
+            this.campoCelular.setText("");
+        }
+        if(campo.equals("telResidencial")){
+            this.campoResidencial.setText("");
+        }
+        if(campo.equals("login")){
+            this.campoLogin.setText("");
+        }
+    }
     
     private void limparCampos(){
         this.campoCelular.setText("");
@@ -301,37 +449,14 @@ public class JanelaCadastro extends javax.swing.JFrame {
     }
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JanelaCadastro().setVisible(true);
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConcluir;
     private javax.swing.JButton btnImovel;
@@ -343,6 +468,7 @@ public class JanelaCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField campoNumConta;
     private javax.swing.JTextField campoResidencial;
     private javax.swing.JPasswordField campoSenha;
+    private javax.swing.ButtonGroup grupoOp;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -353,8 +479,9 @@ public class JanelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JCheckBox opDebito;
-    private javax.swing.JCheckBox opEmail;
+    private javax.swing.JLabel lblExiste;
+    private javax.swing.JRadioButton opDebito;
+    private javax.swing.JRadioButton opEmail;
     private javax.swing.JPanel pnlDebito;
     // End of variables declaration//GEN-END:variables
 }

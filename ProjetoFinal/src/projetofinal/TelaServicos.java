@@ -62,6 +62,11 @@ public class TelaServicos extends javax.swing.JPanel {
 
         btnSair.setFont(new java.awt.Font("Noto Mono", 0, 15)); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,6 +128,11 @@ public class TelaServicos extends javax.swing.JPanel {
     private void btnVazamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVazamentoActionPerformed
         cardLayout.show(this.getParent(), "telaVazamento");
     }//GEN-LAST:event_btnVazamentoActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        //Cliente cliente = Cliente.fechar();
+        cardLayout.first(this.getParent());
+    }//GEN-LAST:event_btnSairActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 public class JanelaPrincipal extends javax.swing.JFrame {
     private CardLayout paginas;
@@ -12,20 +13,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     
     public JanelaPrincipal() {
         initComponents();
-        controller = new Controller();
+        controller = Controller.iniciar();
         paginas = (CardLayout) this.painelPrincipal.getLayout();
         this.painelPrincipal.add(new TelaServicos(paginas), "telaServicos");
-        this.painelPrincipal.add(new TelaInfos(paginas), "telaInfos");
         this.painelPrincipal.add(new TelaCadastroImovel(), "telaCadastroImovel");
         this.painelPrincipal.add(new TelaVazamento(), "telaVazamento");
         this.painelPrincipal.add(new TelaServicosFuncionario(paginas), "telaServFuncionario");
         this.painelPrincipal.add(new TelaSolicitacoes(), "telaSolicitacoes");
     }
     
-    public void limparCampos(){
-        this.campoID.setText("");
-        this.campoSenha.setText("");
-    }
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,9 +94,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                         .addComponent(campoID, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLoginLayout.createSequentialGroup()
                         .addComponent(btnCadastrar)
-                        .addGap(64, 64, 64)
+                        .addGap(83, 83, 83)
                         .addComponent(btnEntrar)
-                        .addGap(34, 34, 34)))
+                        .addGap(15, 15, 15)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelLoginLayout.setVerticalGroup(
@@ -146,25 +143,36 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        //Valida o login 
         String idUser = this.campoID.getText();
         String senha = this.campoSenha.getText();
-        try{
-            //se o retorno do validar login for true
-            //if(controller.validaLogin(idUser, senha)){
-                
-            //}   
-            paginas.show(this.painelPrincipal, "telaServicos");
-        }catch(NumberFormatException e){
+        Login login = new Login(idUser, senha);
+        Cliente cliente = Cliente.iniciar();
+  
+        this.limparCampos();
+        if (this.controller.validaLogin(login)){
+            int posiUser = this.controller.buscarUser(login);
+            IUsuario user = this.controller.getUsuario(posiUser);
             
-        }
-        
+            if (user.getTipo().equalsIgnoreCase("Funcionario")){
+                paginas.show(this.painelPrincipal, "telaServFuncionario");
+            } else if (user.getTipo().equalsIgnoreCase("Cliente")){
+                cliente = (Cliente) user;
+                Cliente.setCliente(cliente);
+                this.painelPrincipal.add(new TelaInfos(paginas), "telaInfos");
+                paginas.show(this.painelPrincipal, "telaServicos");
+            }           
+        }else {
+            JOptionPane.showMessageDialog(this, "Usuário e/ou senha incorretos", "Login Incorreto", JOptionPane.ERROR_MESSAGE);
+        }      
     }//GEN-LAST:event_btnEntrarActionPerformed
-
+     public void limparCampos(){
+        this.campoID.setText("");
+        this.campoSenha.setText("");
+    }
     private class JanelaListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {
-            JanelaCadastro janelaCadastro = JanelaCadastro.iniciar();
+            JanelaCadastro janelaCadastro = JanelaCadastro.iniciar(controller);
             janelaCadastro.addWindowListener(new WindowAdapter(){
                 @Override
                 public void windowClosing(WindowEvent e){
@@ -173,7 +181,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             });
         }
     }
-    
+      
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
