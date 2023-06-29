@@ -19,7 +19,6 @@ public class Controller {
         funcionario.setLogin(loginFuncionario);
         this.model = new Model();
         this.model.addUsuario(funcionario);
-        //this.model.addSolicitacao(new Solicitacao("Solicitação teste", "filipe", 98632657));
     }
     public int validaNumeros(String numero){
         int num;
@@ -27,7 +26,6 @@ public class Controller {
             num = Integer.parseInt(numero);
         }catch(NumberFormatException e){
             num = -999;
-            System.out.println(e.getMessage());
         }
         return num;
     }

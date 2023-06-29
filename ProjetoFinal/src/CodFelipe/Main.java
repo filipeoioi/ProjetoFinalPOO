@@ -22,7 +22,9 @@ public class Main implements Integracao{
 
     @Override
     public String getDescricaoProjeto() {
-        return "Software tem como intuito tornar a vida do cliente mais simples, fornecendo serviços de autoantendimento sem que tenha a necessidade de que o cliente se desloque para uma agêencia local.";
+        return "Software tem como intuito tornar a vida do cliente mais simples, "
+                + "fornecendo serviços de autoantendimento sem que tenha a necessidade de que "
+                + "o cliente se desloque para uma agêencia local.";
     }
 
     @Override
@@ -44,14 +46,6 @@ public class Main implements Integracao{
         classes.add("Imovel");
         classes.add("Login");
         classes.add("Solicitação");
-        return new ArrayList<String>();
-    }
-    
-    public Main(){
-        this.iniciar();
-    }
-    
-    public static void main(String[] args) {
-        new Main();
+        return classes;
     }
 }
